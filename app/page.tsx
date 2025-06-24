@@ -314,20 +314,12 @@ export default function Home() {
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {category.skills.map((skill) => (
-                    <motion.div
+                    <div
                       key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      whileHover={{
-                        scale: 1.05,
-                        backgroundColor: "rgb(245 245 245)",
-                      }}
-                      transition={{ duration: 0.2 }}
-                      viewport={{ once: true }}
-                      className="p-4 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-all text-center shadow-sm cursor-default"
+                      className="p-4 rounded-lg bg-white border border-neutral-200 hover:border-neutral-300 transition-all text-center shadow-sm cursor-default hover:scale-105 duration-200"
                     >
                       {skill}
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </motion.div>
@@ -355,72 +347,46 @@ export default function Home() {
           </motion.div>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="p-6 rounded-xl bg-white border border-neutral-200 hover:border-neutral-300 transition-all shadow-sm space-y-4"
-            >
-              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">
-                  Bachelor of Music Education
-                </h3>
-                <p className="text-neutral-600">
-                  University of Texas at San Antonio
-                </p>
-              </div>
-              <div className="pt-4 border-t border-neutral-100">
-                <p className="text-neutral-500 text-sm">
-                  Strong foundation in analytical thinking, pattern recognition,
-                  and complex system understanding. Skills that directly
-                  translate to software development and problem-solving.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="p-6 rounded-xl bg-white border border-neutral-200 hover:border-neutral-300 transition-all shadow-sm space-y-4"
-            >
-              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">Harvard CS50</h3>
-                <p className="text-neutral-600">Harvard University</p>
-              </div>
-              <div className="pt-4 border-t border-neutral-100">
-                <p className="text-neutral-500 text-sm">
-                  Intensive computer science curriculum covering data
-                  structures, algorithms, web development, and software
-                  engineering principles. Developed strong programming
-                  fundamentals and problem-solving skills.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="p-6 rounded-xl bg-white border border-neutral-200 hover:border-neutral-300 transition-all shadow-sm space-y-4"
-            >
-              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">
-                  IBM Agile Certification
-                </h3>
-                <p className="text-neutral-600">IBM</p>
-              </div>
-              <div className="pt-4 border-t border-neutral-100">
-                <p className="text-neutral-500 text-sm">
-                  Professional certification in agile methodologies,
-                  demonstrating expertise in modern software development
-                  practices and team collaboration.
-                </p>
-              </div>
-            </motion.div>
+            {[
+              {
+                title: "Bachelor of Music Education",
+                institution: "University of Texas at San Antonio",
+                description:
+                  "Strong foundation in analytical thinking, pattern recognition, and complex system understanding. Skills that directly translate to software development and problem-solving.",
+              },
+              {
+                title: "Harvard CS50",
+                institution: "Harvard University",
+                description:
+                  "Intensive computer science curriculum covering data structures, algorithms, web development, and software engineering principles. Developed strong programming fundamentals and problem-solving skills.",
+              },
+              {
+                title: "IBM Agile Certification",
+                institution: "IBM",
+                description:
+                  "Professional certification in agile methodologies, demonstrating expertise in modern software development practices and team collaboration.",
+              },
+            ].map((edu, index) => (
+              <motion.div
+                key={edu.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="p-6 rounded-xl bg-white border border-neutral-200 hover:border-neutral-300 transition-all shadow-sm space-y-4 hover:scale-105 duration-200">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold">{edu.title}</h3>
+                    <p className="text-neutral-600">{edu.institution}</p>
+                  </div>
+                  <div className="pt-4 border-t border-neutral-100">
+                    <p className="text-neutral-500 text-sm">
+                      {edu.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
