@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import { cn } from "@/lib/utils";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "700"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Your Portfolio",
-  description: "A showcase of my projects and skills",
+  title: "Blaine Cowen | Full Stack Developer",
+  description: "Full Stack Developer specializing in modern web technologies",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -22,13 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-white font-sans antialiased",
-          fontSans.variable
-        )}
-      >
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      </head>
+      <body className={inter.className}>
         <Header />
         <div className="flex-grow">{children}</div>
         <Footer />

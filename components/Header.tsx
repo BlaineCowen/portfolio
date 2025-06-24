@@ -4,6 +4,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function Header() {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <header className="fixed top-0 z-50 w-full border-b border-neutral-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -19,33 +25,34 @@ export function Header() {
             >
               Home
             </Link>
-            <Link
-              href="/projects"
+            <a
+              href="#projects"
+              onClick={(e) => handleScroll(e, "projects")}
               className="text-sm font-medium text-neutral-600 hover:text-black transition-colors"
             >
               Projects
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm font-medium text-neutral-600 hover:text-black transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
+            </a>
+
+            <a
+              href="#contact"
+              onClick={(e) => handleScroll(e, "contact")}
               className="text-sm font-medium text-neutral-600 hover:text-black transition-colors"
             >
               Contact
-            </Link>
+            </a>
           </div>
           <Button
             variant="outline"
             asChild
             className="border-neutral-200 hover:bg-neutral-100 transition-all duration-300"
           >
-            <Link href="https://github.com/your-gh" target="_blank">
+            <a
+              href="https://github.com/BlaineCowen"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               GitHub
-            </Link>
+            </a>
           </Button>
         </div>
       </nav>
