@@ -2,9 +2,31 @@
 
 import { ProjectCard } from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  animate,
+  useMotionValue,
+} from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
+
+const CursorBlinker = ({ isTypingDone }: { isTypingDone: boolean }) => {
+  return (
+    <motion.div
+      animate={{ opacity: isTypingDone ? 0 : [0, 0, 1, 1] }}
+      transition={{
+        duration: 1,
+        repeat: isTypingDone ? 0 : Infinity,
+        repeatDelay: 0,
+        ease: "linear",
+        times: [0, 0.5, 0.5, 1],
+      }}
+      className="inline-block h-[1em] w-[2px] translate-y-1 bg-neutral-950"
+    />
+  );
+};
 
 export default function Home() {
   const ref = useRef(null);
@@ -13,6 +35,24 @@ export default function Home() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
+  // Add text animation logic
+  const text = "Blaine Cowen";
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+  const displayText = useTransform(rounded, (latest) => text.slice(0, latest));
+  const [isTypingDone, setIsTypingDone] = useState(false);
+
+  useEffect(() => {
+    const controls = animate(count, text.length, {
+      type: "tween",
+      duration: 2,
+      delay: 0.2,
+      ease: "easeInOut",
+      onComplete: () => setIsTypingDone(true),
+    });
+    return controls.stop;
+  }, []);
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -125,12 +165,13 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+              transition={{ duration: 0.5 }}
               className="overflow-visible py-8"
             >
               <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1] mb-0">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-950 to-neutral-500 whitespace-nowrap">
-                  Blaine Cowen
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-950 to-neutral-500 whitespace-nowrap inline-flex items-center">
+                  <motion.span>{displayText}</motion.span>
+                  <CursorBlinker isTypingDone={isTypingDone} />
                 </span>
               </h1>
             </motion.div>
