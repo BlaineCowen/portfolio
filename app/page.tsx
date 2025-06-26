@@ -168,7 +168,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="overflow-visible py-8"
             >
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1] mb-0">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold tracking-tight leading-[1] mb-0">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-neutral-950 to-neutral-500 whitespace-nowrap inline-flex items-center">
                   <motion.span>{displayText}</motion.span>
                   <CursorBlinker isTypingDone={isTypingDone} />
@@ -196,7 +196,7 @@ export default function Home() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-neutral-300 bg-white hover:bg-neutral-100 text-neutral-900 transition-all duration-300 text-lg h-12 px-6"
+                className="border-neutral-300 bg-white hover:bg-neutral-100 text-neutral-900 transition-all duration-300 text-sm sm:text-base md:text-lg h-8 sm:h-10 md:h-12 px-4 sm:px-5 md:px-6"
               >
                 <a
                   onClick={(e) => handleScroll(e, "projects")}
@@ -208,7 +208,7 @@ export default function Home() {
               <Button
                 asChild
                 size="lg"
-                className="bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 text-lg h-12 px-6"
+                className="bg-neutral-900 text-white hover:bg-neutral-800 transition-all duration-300 text-sm sm:text-base md:text-lg h-8 sm:h-10 md:h-12 px-4 sm:px-5 md:px-6"
               >
                 <a onClick={(e) => handleScroll(e, "contact")} href="#contact">
                   Contact Me
