@@ -82,6 +82,24 @@ export default function Home() {
       githubUrl: "https://github.com/BlaineCowen/AbcSightreading",
       tags: ["Astro", "Node.js", "Svelte", "Tailwind"],
     },
+    {
+      title: "Jeopardy! Lite",
+      description:
+        "A multiplayer trivia challenge inspired by Jeopardy with category-based rounds and fast classroom-friendly gameplay.",
+      imageUrl:
+        "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/jeopardy-lite.png",
+      demoUrl: "https://jeopardy-lite.vercel.app/",
+      tags: ["Next.js", "TypeScript", "React", "Tailwind", "Multiplayer"],
+    },
+    {
+      title: "Music Explorer",
+      description:
+        "An ear-training game suite for classrooms and solo practice featuring intervals, rhythm, solfege, and steady beat modes.",
+      imageUrl:
+        "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/music-explorer.png",
+      demoUrl: "https://music-learn-fun.vercel.app/",
+      tags: ["Next.js", "TypeScript", "React", "Tailwind", "Tone.js"],
+    },
     // Add more projects as needed
     {
       title: "Oscar Action",
