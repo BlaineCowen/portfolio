@@ -1,66 +1,218 @@
 @import "tailwindcss";
 
-/* Base styles */
-:root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 5.9% 10%;
+/* ------------------------------------------------------------------
+   Design tokens (Tailwind v4 `@theme`: the ONLY source of
+   truth. The old tailwind.config.{ts,js} files were deleted. Under v4 with
+   `@import "tailwindcss"` and no `@config` directive they were never read,
+   so the scale they declared silently did not exist.)
+   ------------------------------------------------------------------ */
+@theme {
+  /* Canvas + surfaces */
+  --color-bg: #0a0a0b;
+  --color-surface: #141416;
+  --color-surface-2: #1c1c1f;
+  --color-line: #2a2a2e;
+
+  /* Text */
+  --color-ink: #fafafa; /* 18.9:1 on bg */
+  --color-ink-muted: #a1a1a6; /*  8.9:1 on bg */
+  --color-ink-faint: #6e6e73; /*  4.6:1, large/secondary text only */
+
+  /* Brand */
+  --color-gold: #f5a524; /*  9.5:1 on bg */
+  --color-gold-ink: #0a0a0b; /* text on gold fills */
+
+  /* Shadcn semantic aliases, remapped onto the dark palette so
+     components/ui/* actually resolve under v4. */
+  --color-background: #0a0a0b;
+  --color-foreground: #fafafa;
+  --color-card: #141416;
+  --color-card-foreground: #fafafa;
+  --color-popover: #141416;
+  --color-popover-foreground: #fafafa;
+  --color-primary: #fafafa;
+  --color-primary-foreground: #0a0a0b;
+  --color-secondary: #1c1c1f;
+  --color-secondary-foreground: #fafafa;
+  --color-muted: #1c1c1f;
+  --color-muted-foreground: #a1a1a6;
+  --color-accent: #1c1c1f;
+  --color-accent-foreground: #fafafa;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+  --color-border: #2a2a2e;
+  --color-input: #2a2a2e;
+  --color-ring: #f5a524;
+
+  /* Type families, wired to next/font variables in layout.tsx */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+
+  /* Fluid display scale, replacing the dead 10xl to 24xl scale. */
+  --text-display-xl: clamp(3.5rem, 13vw, 11rem);
+  --text-display-xl--line-height: 0.86;
+  --text-display-xl--letter-spacing: -0.04em;
+
+  --text-display: clamp(2.5rem, 7vw, 5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-headline: clamp(1.75rem, 4vw, 3rem);
+  --text-headline--line-height: 1.05;
+  --text-headline--letter-spacing: -0.02em;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.12em;
+
   --radius: 0.5rem;
+
+  /* Shared motion vocabulary */
+  --ease-osmo: cubic-bezier(0.625, 0.05, 0, 1);
 }
 
-.dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-gold-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
-/* Base element styles */
-* {
-  border-color: hsl(var(--border));
+/* ------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------ */
+
+/* Faint structural grid, visible on the dark canvas (the previous
+   white-on-white version never rendered). */
+@utility bg-grid-pattern {
+  background-size: 64px 64px;
+  background-image: linear-gradient(
+      to right,
+      rgb(255 255 255 / 0.028) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.028) 1px, transparent 1px);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 12%,
+    black 78%,
+    transparent
+  );
 }
 
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-feature-settings: "rlig" 1, "calt" 1;
+/* Hero entrance runs on CSS, not JS. Framer's whileInView writes opacity:0
+   into the SSR HTML, so anything relying on it is invisible until hydration,
+   unacceptable for the first screen. These fire on load regardless. */
+@keyframes rise-in {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
-/* Grid pattern background */
-.bg-grid-pattern {
-  background-size: 50px 50px;
-  background-image: linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
-  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-} 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility anim-rise {
+  animation: rise-in 0.85s var(--ease-osmo) both;
+}
+
+@utility anim-fade-up {
+  animation: fade-up 0.7s var(--ease-osmo) both;
+}
+
+/* Scroll reveals. Content ships VISIBLE; JS adds `is-hidden` only to elements
+   that are below the fold and will genuinely be animated in. So a failed
+   bundle, a dead IntersectionObserver, or JS off all degrade to plain visible
+   content instead of a blank page. */
+.reveal {
+  transition:
+    opacity 0.7s var(--ease-osmo),
+    transform 0.7s var(--ease-osmo);
+}
+.reveal.is-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.reveal-lines > span > span {
+  transition: transform 0.85s var(--ease-osmo);
+}
+.reveal-lines.is-hidden > span > span {
+  transform: translateY(110%);
+}
+.reveal-lines > span:nth-child(2) > span {
+  transition-delay: 0.08s;
+}
+.reveal-lines > span:nth-child(3) > span {
+  transition-delay: 0.16s;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Slow amber wash behind the hero. */
+@keyframes glow-drift {
+  0%,
+  100% {
+    transform: translate3d(-6%, -3%, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(6%, 4%, 0) scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
