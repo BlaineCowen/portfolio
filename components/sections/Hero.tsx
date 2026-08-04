@@ -87,7 +87,12 @@ export function Hero() {
             style={{ animationDelay: "0.75s" }}
           >
             Full stack developer. Ten years spent making hard things{" "}
-            <span className="font-serif italic text-ink">click</span> for other
+            {/* Instrument Serif italic kerns "cl" tightly enough that the pair
+                reads as a "d". The tracking keeps the letters apart. */}
+            <span className="font-serif italic tracking-[0.06em] text-ink">
+              click
+            </span>{" "}
+            for other
             people. Now I build the tools instead.
           </p>
 
