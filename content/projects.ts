@@ -15,7 +15,7 @@ export const projects: Project[] = [
     description:
       "Unlimited sight-reading exercises for choirs and ensembles, generated from real harmony rules in the key, level and voicing a group actually needs. SATB, SSA, TTB and unison, aligned to UIL levels 1 to 5, with a generator that is covered by well over a thousand automated tests.",
     imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/abc-home-light.png",
+      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/abc-home-clean.png",
     demoUrl: "https://abc-sightreading.com",
     githubUrl: "https://github.com/BlaineCowen/AbcSightreading",
     tags: ["TypeScript", "Astro", "Svelte", "Tailwind", "PostgreSQL", "Prisma", "Stripe"],
