@@ -5,7 +5,7 @@ import { WorkIndex } from "@/components/work/WorkIndex";
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { SectionHeading } from "./SectionHeading";
 
-const FEATURED = 3;
+const FEATURED = 4;
 
 export function Work() {
   const flagship = projects.find((project) => project.flagship);
@@ -29,7 +29,7 @@ export function Work() {
 
         {flagship && <FlagshipProject project={flagship} />}
 
-        {/* Desktop: the three newest get a full spread, the rest sit in a
+        {/* Desktop: the four newest get a full spread, the rest sit in a
             hover index. Touch and narrow screens get plain cards, because
             the index depends on hover. */}
         <div className="hidden lg:block">

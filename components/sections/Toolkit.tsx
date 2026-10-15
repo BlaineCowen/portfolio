@@ -39,7 +39,7 @@ export function Toolkit() {
                   {group.title}
                 </h3>
                 <ul className="flex flex-wrap gap-x-8 gap-y-4 md:col-span-9">
-                  {group.items.map((skill) => {
+                  {group.items.filter((skill) => usageCount(skill) > 0).map((skill) => {
                     const count = usageCount(skill);
                     return (
                       <li

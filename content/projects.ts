@@ -26,7 +26,7 @@ export const projects: Project[] = [
         "Because the output is randomized, I test it statistically: the suite runs to 1,700+ tests, and many of them generate dozens of exercises and assert on rates, not single cases. That is the part I am proudest of, and the reason I trust it in front of a room of students.",
       ],
       facts: [
-        { figure: "1,700+", label: "Automated tests, many statistical" },
+        { figure: "∞", label: "Exercises, never the same one twice" },
         { figure: "4", label: "Formats: SATB, SSA, TTB, unison" },
         { figure: "5", label: "UIL difficulty levels" },
         { figure: "Pro", label: "Accounts, Stripe billing, Postgres" },
@@ -45,6 +45,20 @@ export const projects: Project[] = [
     demoUrl: "https://octavomusic.app",
     status: "Private preview",
     tags: ["Python", "OMR", "MusicXML"],
+    embeddable: true,
+  },
+  {
+    slug: "uilpml",
+    title: "UIL Results & PML",
+    category: "Data / Search",
+    blurb: "173,600 Texas music contest results, searchable for the first time.",
+    description:
+      "Every Texas UIL concert and sight-reading entry from 2005 to 2026, joined to the Prescribed Music List so a director can see how often a piece is performed and how those performances score. A Python pipeline scrapes the results, de-duplicates them, and fuzzy-matches director-typed titles to official PML codes; a Next.js front end makes all of it searchable across 7,964 schools.",
+    imageUrl:
+      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/uilpml-home.png",
+    demoUrl: "https://www.uilpml.com",
+    githubUrl: "https://github.com/BlaineCowen/UIL_History",
+    tags: ["Next.js", "TypeScript", "SQLite", "Python", "Selenium", "SQL"],
     embeddable: true,
   },
   {
@@ -85,23 +99,6 @@ export const projects: Project[] = [
     status: "Runs locally",
     tags: ["Python", "PyTorch", "Voice conversion"],
     embeddable: false,
-  },
-  {
-    slug: "uil-dashboard",
-    title: "Texas UIL Results Dashboard",
-    category: "Data / Dashboard",
-    blurb: "Twenty years of Texas music contest results, in one place for the first time.",
-    description:
-      "A dashboard for every Texas Music UIL result since 2005. Filter by school, district, and subject, then drill into per-song scores and advanced statistics through a fuzzy search. The data was scraped, normalized, and warehoused from scratch.",
-    imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/uil-screenshot-5DYmgDccXxd2YOAvj84uyVBPDJNJbg.png",
-    demoUrl: "https://uil-csr.streamlit.app/",
-    // The bare URL 303-redirects into Streamlit's auth flow; ?embed=true serves
-    // a clean 200 that will actually render in a frame.
-    previewUrl: "https://uil-csr.streamlit.app/?embed=true",
-    githubUrl: "https://github.com/BlaineCowen/UIL_History",
-    tags: ["Python", "SQL", "Flask", "HTML", "CSS", "Selenium"],
-    embeddable: true,
   },
   {
     slug: "jeopardy-lite",

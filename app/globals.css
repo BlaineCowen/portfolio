@@ -210,6 +210,25 @@
   }
 }
 
+/* Each hero note flashes gold as the playhead crosses it. The delay is set
+   inline from the note's x position, so this only has to describe one hit.
+   No fill-mode: before its first cue a note keeps its resting colour. */
+@keyframes note-hit {
+  0%,
+  1.5% {
+    color: var(--color-gold);
+  }
+  9%,
+  100% {
+    color: #4a4a52;
+  }
+}
+
+.hero-note {
+  color: #4a4a52;
+  animation: note-hit 16s linear infinite;
+}
+
 /* Slow amber wash behind the hero. */
 @keyframes glow-drift {
   0%,
@@ -227,6 +246,9 @@
   .playhead {
     animation: none !important;
     opacity: 0 !important;
+  }
+  .hero-note {
+    animation: none !important;
   }
   *,
   *::before,

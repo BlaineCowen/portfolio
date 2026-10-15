@@ -11,22 +11,18 @@ export const skillGroups: SkillGroup[] = [
   // explicitly, so a usage count would read "1" and understate the truth.
   {
     title: "Languages",
-    items: ["TypeScript", "Python", "C++", "SQL"],
+    items: ["TypeScript", "Python", "SQL", "C++"],
   },
   {
     title: "Frameworks",
-    items: ["Next.js", "React", "Svelte", "Astro", "Node.js", "Flask"],
+    items: ["Next.js", "React", "Svelte", "Astro", "Tailwind"],
   },
   {
-    title: "Interface",
-    items: ["Tailwind", "Shadcn/UI", "Framer Motion"],
-  },
-  {
-    title: "Audio & native",
-    items: ["JUCE", "Real-time DSP", "Tone.js", "CMake"],
+    title: "Audio, ML & native",
+    items: ["Tone.js", "JUCE", "Real-time DSP", "CMake", "PyTorch"],
   },
   {
     title: "Data & infrastructure",
-    items: ["PostgreSQL", "Prisma", "Vercel", "React Query", "Selenium"],
+    items: ["PostgreSQL", "SQLite", "Prisma", "Stripe", "React Query", "Selenium"],
   },
 ];
