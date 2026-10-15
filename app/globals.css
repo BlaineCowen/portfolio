@@ -193,6 +193,23 @@
   }
 }
 
+/* A playhead crossing the hero staff, once every loop, like a score being
+   played back. Linear on purpose: a metronome does not ease. */
+@keyframes playhead {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  6%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--playhead-run, 100vw));
+    opacity: 0;
+  }
+}
+
 /* Slow amber wash behind the hero. */
 @keyframes glow-drift {
   0%,
@@ -207,6 +224,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .playhead {
+    animation: none !important;
+    opacity: 0 !important;
+  }
   *,
   *::before,
   *::after {

@@ -1,30 +1,29 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
-import { ArrowDown } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 import { Magnetic } from "@/components/motion/Magnetic";
+import { Staff } from "@/components/Staff";
+
+/**
+ * Every figure here is checkable against the projects: 17 games and the test
+ * count come from the LearnMusic.fun and abcSightReading repos, 20 years is the
+ * span of the UIL dataset, 10 is the classroom career.
+ */
+const FACTS = [
+  { figure: "10", label: "Years teaching before I wrote code" },
+  { figure: "17", label: "Games live on LearnMusic.fun" },
+  { figure: "20", label: "Years of Texas UIL results, one database" },
+  { figure: "1,700+", label: "Automated tests on abcSightReading" },
+];
 
 /**
  * The first screen animates with CSS keyframes rather than Framer's
  * whileInView. Framer serialises `opacity: 0` into the SSR markup, so if the
- * bundle is slow, blocked, or absent the hero never appears at all, which is
- * exactly what happened when Next blocked cross-origin dev assets over the
- * tailnet. CSS animations run without JS and still animate.
- *
- * Framer is kept only for the decorative parallax and the scroll fade, neither
- * of which hides content.
+ * bundle is slow or blocked the hero never appears at all. CSS animations run
+ * without JS.
  */
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({
@@ -35,65 +34,62 @@ export function Hero() {
   return (
     <section
       id="top"
-      ref={ref}
-      className="relative flex min-h-svh flex-col justify-between overflow-hidden px-6 pb-10 pt-32 md:px-10"
+      className="relative flex min-h-svh flex-col justify-between overflow-hidden px-6 pb-10 pt-28 md:px-10"
     >
-      <motion.div
-        aria-hidden="true"
-        style={reduced ? undefined : { y }}
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute inset-0 bg-grid-pattern" />
-        <div
-          className="absolute left-1/2 top-[38%] h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[130px]"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(245,165,36,0.20), rgba(245,165,36,0.05) 45%, transparent 70%)",
-            animation: reduced ? undefined : "glow-drift 18s ease-in-out infinite",
-          }}
-        />
-      </motion.div>
-
-      <div className="anim-fade-up flex items-center justify-between gap-4">
+      <div className="anim-fade-up mx-auto flex w-full max-w-[90rem] items-center justify-between gap-4">
         <span className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.14em] text-ink-muted">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-70" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
           </span>
-          Available for work
+          Open to full-time roles
         </span>
         <span className="hidden font-mono text-xs uppercase tracking-[0.14em] text-ink-faint sm:block">
           Texas, US
         </span>
       </div>
 
-      <motion.div style={reduced ? undefined : { opacity: fade }}>
-        <h1 className="text-display-xl font-medium">
-          {["Blaine", "Cowen"].map((line, i) => (
-            <span key={line} className="block overflow-hidden pb-[0.08em]">
-              <span
-                className="anim-rise block"
-                style={{ animationDelay: `${(0.15 + i * 0.08).toFixed(2)}s` }}
-              >
-                {line}
+      <div className="mx-auto mt-12 w-full max-w-[90rem]">
+        {/* The staff and the type share one font-size, so the lines are
+            measured in em and stay locked to the lettering at any width. */}
+        <div className="relative text-display-xl">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-[0.24em] h-[0.52em] w-screen -translate-x-1/2 text-[#2e2e33]"
+          >
+            <Staff className="h-full w-full" />
+            <span
+              className="playhead absolute -top-[0.12em] bottom-[-0.12em] left-0 w-px bg-gold"
+              style={{
+                animation: "playhead 16s linear 1.4s infinite",
+                opacity: 0,
+              }}
+            />
+          </div>
+
+          <h1 className="relative font-serif font-normal tracking-[-0.025em]">
+            <span className="block overflow-hidden pb-[0.08em]">
+              <span className="anim-rise block" style={{ animationDelay: "0.15s" }}>
+                Blaine
               </span>
             </span>
-          ))}
-        </h1>
+            <span className="block overflow-hidden pb-[0.08em]">
+              <span className="anim-rise block italic" style={{ animationDelay: "0.23s" }}>
+                Cowen
+              </span>
+            </span>
+          </h1>
+        </div>
 
-        <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <p
-            className="anim-fade-up max-w-md text-lg leading-relaxed text-ink-muted"
+            className="anim-fade-up max-w-xl text-lg leading-relaxed text-ink-muted md:text-xl"
             style={{ animationDelay: "0.75s" }}
           >
-            Full stack developer. Ten years spent making hard things{" "}
-            {/* Instrument Serif italic kerns "cl" tightly enough that the pair
-                reads as a "d". The tracking keeps the letters apart. */}
-            <span className="font-serif italic tracking-[0.06em] text-ink">
-              click
-            </span>{" "}
-            for other
-            people. Now I build the tools instead.
+            Full stack developer. I spent ten years in Texas classrooms making
+            hard things click for other people, and now I build the software
+            that does it: sight-reading generators, ear-training games, and a
+            reader for choral sheet music.
           </p>
 
           <div
@@ -121,23 +117,28 @@ export function Hero() {
             </Magnetic>
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      <button
-        type="button"
-        onClick={() => scrollTo("work")}
-        aria-label="Scroll to work"
-        className="anim-fade-up mx-auto text-ink-faint transition-colors hover:text-gold"
-        style={{ animationDelay: "1.1s" }}
+      <dl
+        className="anim-fade-up mx-auto mt-14 grid w-full max-w-[90rem] grid-cols-2 border-t border-line md:grid-cols-4"
+        style={{ animationDelay: "1s" }}
       >
-        <motion.span
-          className="block"
-          animate={reduced ? undefined : { y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown size={20} />
-        </motion.span>
-      </button>
+        {FACTS.map((fact, i) => (
+          <div
+            key={fact.label}
+            className={`flex flex-col-reverse justify-end gap-2 py-6 pr-6 ${i > 0 ? "md:border-l md:border-line md:pl-6" : ""} ${
+              i % 2 === 1 ? "max-md:border-l max-md:border-line max-md:pl-6" : ""
+            }`}
+          >
+            <dt className="text-sm leading-snug text-ink-muted">
+              {fact.label}
+            </dt>
+            <dd className="font-serif text-4xl tracking-tight text-ink md:text-5xl">
+              {fact.figure}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

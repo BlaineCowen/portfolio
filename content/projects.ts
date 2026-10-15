@@ -1,13 +1,91 @@
 import type { Project } from "@/lib/types";
 
 /**
- * `embeddable` was verified against live response headers:
- *   - oscaraction.com sends `x-frame-options: DENY`
- *   - uil-csr.streamlit.app returns an endless 303 redirect loop (Streamlit sleep/wake)
- * Both fall back to their static screenshot. The rest returned 200 with no
- * X-Frame-Options and no CSP frame-ancestors.
+ * `embeddable` was verified against live response headers (no X-Frame-Options or
+ * CSP frame-ancestors on the framed sites). uil-csr.streamlit.app returns an
+ * endless 303 redirect loop (Streamlit sleep/wake) and falls back to its
+ * screenshot via `previewUrl`.
  */
 export const projects: Project[] = [
+  {
+    slug: "abc-sightreading",
+    title: "abcSightReading",
+    category: "Music / Generative",
+    blurb: "Endless four-part sight-reading, generated from real harmony rules.",
+    description:
+      "Unlimited sight-reading exercises for choirs and ensembles, generated from real harmony rules in the key, level and voicing a group actually needs. SATB, SSA, TTB and unison, aligned to UIL levels 1 to 5, with a generator that is covered by well over a thousand automated tests.",
+    imageUrl:
+      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/abc-home.png",
+    demoUrl: "https://abc-sightreading.com",
+    githubUrl: "https://github.com/BlaineCowen/AbcSightreading",
+    tags: ["TypeScript", "Astro", "Svelte", "Tailwind", "PostgreSQL", "Prisma", "Stripe"],
+    flagship: {
+      story: [
+        "Every sight-reading exercise a choir can buy gets memorized within a week, and writing a fresh four-part one by hand takes longer than the rehearsal it is for. I kept hitting that wall as a teacher, so I wrote a generator instead.",
+        "It composes SATB, SSA, TTB and unison exercises from real harmony rules, in the key, range and difficulty a group actually needs, graded against the Texas UIL levels I used to prepare students for. Students can play along to a backing track, tune with the built-in tuner, and practise piano with graded playback.",
+        "Because the output is randomized, I test it statistically: the suite runs to 1,700+ tests, and many of them generate dozens of exercises and assert on rates, not single cases. That is the part I am proudest of, and the reason I trust it in front of a room of students.",
+      ],
+      facts: [
+        { figure: "1,700+", label: "Automated tests, many statistical" },
+        { figure: "4", label: "Formats: SATB, SSA, TTB, unison" },
+        { figure: "5", label: "UIL difficulty levels" },
+        { figure: "Pro", label: "Accounts, Stripe billing, Postgres" },
+      ],
+    },
+    embeddable: true,
+  },
+  {
+    slug: "octavo",
+    title: "Octavo",
+    category: "Music / OMR",
+    blurb: "Reads your choir's sheet music, so you only fix what it got wrong.",
+    description:
+      "Upload a PDF or phone photos of choral octavos and get back an editable score, with the original page beside it. Where the reading is unsure, it shows that spot on the page and asks. Output is MusicXML for MuseScore, Sibelius, Dorico or Finale, MIDI for rehearsal tracks, or a PDF to print.",
+    imageUrl: "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/octavo-home.png",
+    demoUrl: "https://octavomusic.app",
+    status: "Private preview",
+    tags: ["Python", "OMR", "MusicXML"],
+    embeddable: true,
+  },
+  {
+    slug: "learnmusic",
+    title: "LearnMusic.fun",
+    category: "Music / Education",
+    blurb: "Seventeen ear-training and theory games built for the music classroom.",
+    description:
+      "Seventeen ear-training and theory games with solo, classroom, team and four-corners play modes, a projector-friendly full-screen view, and class leaderboards that need no student accounts. Audio is synthesized in the browser; accounts, sessions and premium subscriptions sit on PostgreSQL and Stripe.",
+    imageUrl: "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/learnmusic-home.png",
+    demoUrl: "https://www.learnmusic.fun",
+    tags: ["Next.js", "TypeScript", "React", "Tailwind", "Tone.js", "PostgreSQL"],
+    embeddable: true,
+  },
+  {
+    slug: "teacher-tools",
+    title: "Teacher Tools",
+    category: "Tooling / Classroom",
+    blurb: "The classroom workflows I use every day, in one place.",
+    description:
+      "A collection of the workflows I leaned on most as a teacher, built to share one roster: automated attendance with a check-in kiosk, a points tracker with a class leaderboard, drag-and-drop seating charts, rubric grading, and roster management with CSV import. Add your students once and every tool already knows them. A pre-loaded demo class lets anyone try it without an account.",
+    imageUrl:
+      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/teacher-tools-home.png",
+    demoUrl: "https://teacher-tools.blainecowen.com",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "React Query"],
+    embeddable: true,
+  },
+  {
+    slug: "octivate",
+    title: "Octivate",
+    category: "Audio / ML",
+    blurb: "Sing an octave low, get a clean female voice back, entirely locally.",
+    description:
+      "Voice conversion for choral demo tracks: sing the part an octave below where it sits and get back a clear female voice at the right pitch. A Whisper-based encoder keeps the words and discards the singer's timbre, and a diffusion transformer resynthesizes from a target speaker embedding plus the pitch curve shifted up twelve semitones. Runs on Apple Silicon with no account and no upload, and ships with a verification script that measures pitch error, timing drift and speaker similarity against a naive formant warp.",
+    imageUrl:
+      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/octivate-home.png",
+    // Local command-line tool built on Seed-VC; nothing public to link to.
+    status: "Runs locally",
+    tags: ["Python", "PyTorch", "Voice conversion"],
+    embeddable: false,
+  },
   {
     slug: "uil-dashboard",
     title: "Texas UIL Results Dashboard",
@@ -26,20 +104,6 @@ export const projects: Project[] = [
     embeddable: true,
   },
   {
-    slug: "abc-sightreading",
-    title: "ABC Sightreading",
-    category: "Music / Generative",
-    blurb: "Generates endless custom sightreading exercises on demand.",
-    description:
-      "A generative approach to music sightreading practice. Set the constraints (key, range, rhythm, difficulty) and it composes fresh exercises, so students never run out of material or memorize the answers.",
-    imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/sight-reading-1IbjSXgREhwMaoJLNSV1MXZBVZWdqY.png",
-    demoUrl: "https://abc-sightreading.vercel.app/",
-    githubUrl: "https://github.com/BlaineCowen/AbcSightreading",
-    tags: ["Astro", "Node.js", "Svelte", "Tailwind"],
-    embeddable: true,
-  },
-  {
     slug: "jeopardy-lite",
     title: "Jeopardy! Lite",
     category: "Game / Multiplayer",
@@ -52,91 +116,6 @@ export const projects: Project[] = [
       "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/jeopardy-lite-board.png",
     demoUrl: "https://jeopardy-lite.vercel.app/",
     tags: ["Next.js", "TypeScript", "React", "Tailwind", "Multiplayer"],
-    embeddable: true,
-  },
-  {
-    slug: "music-explorer",
-    title: "Music Explorer",
-    category: "Music / Education",
-    blurb: "An ear-training suite: intervals, rhythm, solfege, steady beat.",
-    description:
-      "A suite of ear-training games for classrooms and solo practice, covering intervals, rhythm, solfege, and steady beat. Audio is synthesized in the browser, so it works on any device without downloads.",
-    imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/projects/music-explorer.png",
-    demoUrl: "https://music-learn-fun.vercel.app/",
-    tags: ["Next.js", "TypeScript", "React", "Tailwind", "Tone.js"],
-    embeddable: true,
-  },
-  {
-    slug: "oscar-action",
-    title: "Oscar Action",
-    category: "Game / Live data",
-    blurb: "A friendly Oscars betting game driven by real-time odds.",
-    description:
-      "A friendly 'betting' game for the Academy Awards, pulling live odds and nominee data from several APIs. A Python backend keeps the odds fresh while the frontend handles pools and scoring.",
-    imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/oscaraction-XiEfyCBYNuDLUWXQJRMvq704FMqS6C.png",
-    demoUrl: "https://oscaraction.com",
-    githubUrl: "https://github.com/BlaineCowen/oscar-bet",
-    tags: ["Next.js", "Tailwind", "Python", "FastAPI", "PostgreSQL", "Docker"],
-    // Sends `x-frame-options: DENY`, so it will never render in a frame.
-    embeddable: false,
-  },
-  {
-    slug: "easy-attendance",
-    title: "Easy Attendance",
-    category: "Tooling / Analytics",
-    blurb: "Attendance for large groups, with the reporting that was always missing.",
-    description:
-      "An attendance system built for large groups, with report tracking and analytics. Designed around the actual problem: taking roll for a hundred students has to happen in under a minute, and the data has to be useful afterward.",
-    imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/easy-attendance-kufjTAtqiKbzqSCVvMA724aGlZFHkS.png",
-    demoUrl: "https://rehearsal-check-in-inky.vercel.app/",
-    githubUrl: "https://github.com/BlaineCowen/rehearsal-check-in",
-    tags: [
-      "Next.js",
-      "Tailwind",
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "React Query",
-    ],
-    embeddable: true,
-  },
-  {
-    slug: "aurdle",
-    title: "Aurdle",
-    category: "Music / Game",
-    blurb: "Wordle, but you have to hear the answer.",
-    description:
-      "A Wordle-style daily game for ear training: guess the sequence by listening rather than reading. Same compulsive loop, aimed at a skill musicians actually need.",
-    imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/aurdle-mcRyNzntJbjku8NjHnb2SGNJx8Q0L4.png",
-    demoUrl: "https://aurdle.vercel.app/",
-    githubUrl: "https://github.com/BlaineCowen/aurdle",
-    tags: [
-      "Next.js",
-      "Tailwind",
-      "React",
-      "Vercel",
-      "Tone.js",
-      "Shadcn/UI",
-      "Framer Motion",
-    ],
-    embeddable: true,
-  },
-  {
-    slug: "sb-squares",
-    title: "Super Bowl Squares",
-    category: "Game / Utility",
-    blurb: "The office pool, without the spreadsheet.",
-    description:
-      "An online tool for running Super Bowl Squares. Grid setup, claiming, and scoring are handled, so nobody has to maintain a shared spreadsheet on game day.",
-    imageUrl:
-      "https://3isexyxg2bd3whr8.public.blob.vercel-storage.com/sb-squares-coccvbKssqfP5AQEVwKANK8dddS7Fp.png",
-    demoUrl: "https://sb-squares.vercel.app/",
-    githubUrl: "https://github.com/BlaineCowen/sb-squares",
-    tags: ["Astro", "Node.js", "Svelte", "Tailwind"],
     embeddable: true,
   },
   {

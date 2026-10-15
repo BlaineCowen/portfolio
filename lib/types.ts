@@ -38,6 +38,14 @@ export type Project = {
    * Optional written case study. The "Case Study" affordance only renders
    * when this exists, so writeups can be added one at a time.
    */
+  /**
+   * Marks the one project that gets a full-width spread above the rest of the
+   * work, with the story behind it. Only one project should set this.
+   */
+  flagship?: {
+    story: string[];
+    facts: { figure: string; label: string }[];
+  };
   caseStudy?: {
     problem: string;
     solution: string;

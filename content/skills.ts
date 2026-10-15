@@ -15,7 +15,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "Frameworks",
-    items: ["Next.js", "React", "Svelte", "Astro", "Node.js", "FastAPI", "Flask"],
+    items: ["Next.js", "React", "Svelte", "Astro", "Node.js", "Flask"],
   },
   {
     title: "Interface",
@@ -27,6 +27,6 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "Data & infrastructure",
-    items: ["PostgreSQL", "Docker", "Vercel", "React Query", "Selenium"],
+    items: ["PostgreSQL", "Prisma", "Vercel", "React Query", "Selenium"],
   },
 ];

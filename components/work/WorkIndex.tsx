@@ -19,7 +19,14 @@ import { cn } from "@/lib/utils";
 const PANEL_W = 440;
 const PANEL_H = 290;
 
-export function WorkIndex({ projects }: { projects: Project[] }) {
+export function WorkIndex({
+  projects,
+  offset = 0,
+}: {
+  projects: Project[];
+  /** Rows already shown above, so numbering continues rather than restarting. */
+  offset?: number;
+}) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [enterFrom, setEnterFrom] = useState<1 | -1>(1);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,10 +81,10 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
                 />
 
                 <span className="font-mono text-xs text-ink-faint md:col-span-1">
-                  {String(index + 1).padStart(2, "0")}
+                  {String(index + offset + 1).padStart(2, "0")}
                 </span>
 
-                <h3 className="text-2xl tracking-tight md:col-span-5 md:text-3xl">
+                <h3 className="font-serif text-3xl tracking-tight md:col-span-4 md:text-4xl">
                   {project.demoUrl ? (
                     <a
                       href={project.demoUrl}
@@ -102,7 +109,18 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
                   {project.blurb}
                 </p>
 
-                <span className="flex items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.12em] text-ink-faint md:col-span-2 md:justify-end">
+                <span className="flex items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.12em] text-ink-faint md:col-span-3 md:justify-end">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      // Sits above the stretched row link.
+                      className="relative z-10 underline-offset-4 hover:text-gold hover:underline"
+                    >
+                      Source
+                    </a>
+                  )}
                   {project.category}
                   {project.demoUrl ? (
                     <ArrowUpRight
@@ -123,17 +141,6 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
                   )}
                 </span>
 
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    // Sits above the stretched row link.
-                    className="relative z-10 hidden font-mono text-xs uppercase tracking-[0.12em] text-ink-faint underline-offset-4 hover:text-gold hover:underline md:col-span-12 md:block md:w-fit"
-                  >
-                    Source
-                  </a>
-                )}
               </div>
             </li>
           );

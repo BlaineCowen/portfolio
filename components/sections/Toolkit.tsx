@@ -28,7 +28,7 @@ export function Toolkit() {
               something I built.
             </>
           }
-          intro="The number beside each is how many of the nine projects use it. If it is not in one of them, it is not on this list."
+          intro="The number beside each is how many of the projects shown here use it. If it is not in one of them, it is not on this list."
         />
 
         <div className="space-y-12">

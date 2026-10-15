@@ -67,7 +67,7 @@ export function Path() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={reduced ? undefined : { opacity: 0, y: -18 }}
                     transition={{ duration: 0.4, ease: EASE }}
-                    className="text-display font-medium tracking-tight text-ink"
+                    className="font-serif text-[clamp(2.5rem,5.4vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink"
                   >
                     {milestones[active].title}
                   </motion.h3>
@@ -96,7 +96,7 @@ export function Path() {
                 ref={(node) => {
                   stepRefs.current[i] = node;
                 }}
-                className="flex min-h-[60svh] flex-col justify-center border-b border-line py-12 last:border-b-0 md:min-h-svh md:border-b-0 md:py-0"
+                className="flex min-h-[60svh] flex-col justify-center border-b border-line py-12 last:border-b-0 md:min-h-[72svh] md:border-b-0 md:py-0"
               >
                 <motion.div
                   initial={reduced ? false : { opacity: 0.35 }}
@@ -108,10 +108,10 @@ export function Path() {
                     {milestone.eyebrow}
                   </span>
                   {/* Visible only where the sticky column is hidden. */}
-                  <h3 className="mt-4 text-3xl font-medium tracking-tight text-ink md:hidden">
+                  <h3 className="mt-4 font-serif text-4xl tracking-tight text-ink md:hidden">
                     {milestone.title}
                   </h3>
-                  <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
+                  <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted md:text-xl md:leading-relaxed">
                     {milestone.body}
                   </p>
                 </motion.div>

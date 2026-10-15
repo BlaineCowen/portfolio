@@ -1,18 +1,22 @@
 import { education } from "@/content/education";
 import { Reveal } from "@/components/motion/Reveal";
+import { Staff } from "@/components/Staff";
 
 export function Credentials() {
   return (
     <section className="px-6 pb-24 md:px-10 md:pb-36">
       <div className="mx-auto max-w-[90rem]">
         <Reveal>
-          <div className="mb-10 flex items-center gap-4 border-b border-line pb-4">
-            <span className="font-mono text-xs tracking-[0.12em] text-gold">
-              04
-            </span>
-            <span className="font-mono text-xs uppercase tracking-[0.12em] text-ink-faint">
-              Education
-            </span>
+          <div className="mb-10">
+            <div className="flex items-baseline gap-4">
+              <span className="font-serif text-xl italic leading-none text-gold">
+                04
+              </span>
+              <span className="font-mono text-xs uppercase tracking-[0.12em] text-ink-faint">
+                Education
+              </span>
+            </div>
+            <Staff className="mt-3 h-7 w-full text-[#26262a]" />
           </div>
         </Reveal>
 
@@ -20,7 +24,7 @@ export function Credentials() {
           {education.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.07} className="h-full">
               <div className="flex h-full flex-col bg-bg p-8">
-                <h3 className="text-xl font-medium tracking-tight text-ink">
+                <h3 className="font-serif text-2xl font-normal tracking-tight text-ink">
                   {item.title}
                 </h3>
                 <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-gold">
